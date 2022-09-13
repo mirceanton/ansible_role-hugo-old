@@ -1,2 +1,4 @@
 ---
-# defaults file for template
+hugo_version: 0.102.3
+hugo_extended: true
+hugo_arch: Linux-64bit

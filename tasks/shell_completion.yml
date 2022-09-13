@@ -11,3 +11,4 @@
     path: /etc/profile.d/hugo_completion.sh
     line: "source <(hugo completion {{ hugo_shell }})"
     create: true
+    mode: u=rw,g=r,o=r

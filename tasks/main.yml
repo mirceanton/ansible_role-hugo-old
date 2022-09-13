@@ -1,6 +1,6 @@
 ---
 - name: Check if Hugo is installed
-  ansible.builtin.shell: hugo version
+  ansible.builtin.command: hugo version
   failed_when: false
   changed_when: false
   register: __hugo_output__

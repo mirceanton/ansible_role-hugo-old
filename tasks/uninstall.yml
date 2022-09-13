@@ -4,4 +4,3 @@
   ansible.builtin.file:
     path: /usr/local/bin/hugo
     state: absent
-  

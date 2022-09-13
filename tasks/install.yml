@@ -3,6 +3,7 @@
   ansible.builtin.get_url:
     url: "https://github.com/gohugoio/hugo/releases/download/v{{ hugo_version }}/hugo_{% if hugo_extended %}extended_{% endif %}{{ hugo_version }}_{{ hugo_arch }}.tar.gz"
     dest: /tmp/hugo.tar.gz
+    mode: u=rw,g=rw,o=rw
 
 - name: Extract Archive
   ansible.builtin.unarchive:

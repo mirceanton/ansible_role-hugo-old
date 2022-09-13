@@ -12,3 +12,7 @@
 
 - import_tasks: install.yml
   when: hugo_version not in __hugo_output__.stdout
+
+- import_tasks: shell_completion.yml
+  when:
+    - hugo_shell is defined

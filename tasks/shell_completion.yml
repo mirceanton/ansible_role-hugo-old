@@ -1,0 +1,13 @@
+---
+- name: Validate hugo shell
+  ansible.builtin.assert:
+    that:
+      - hugo_shell is match("bash") or hugo_shell is match("fish") or hugo_shell is match("zsh")
+    msg: "hugo_shell can obly be bash, fish or zsh"
+
+- name: Set up shell completion
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/profile.d/hugo_completion.sh
+    line: "source <(hugo completion {{ hugo_shell }})"
+    create: true

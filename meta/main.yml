@@ -1,0 +1,21 @@
+---
+galaxy_info:
+  role_name: hugo
+  description: An Ansible role that installs the Hugo static site generator.
+
+  author: Mircea-Pavel ANTON
+
+  license: license (MIT)
+
+  min_ansible_version: '2.1'
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - jammy
+
+  galaxy_tags:
+    - hugo
+    - ssg
+
+dependencies: []

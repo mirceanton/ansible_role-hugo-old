@@ -1,0 +1,27 @@
+---
+- name: Check if Hugo is installed
+  ansible.builtin.command: hugo version
+  failed_when: false
+  changed_when: false
+  register: __hugo_output__
+
+- name: Set facts
+  ansible.builtin.set_fact:
+    __hugo_is_installed__: "{{ __hugo_output__.rc == 0 }}"
+    __hugo_version_not_ok__: "{{ hugo_version not in __hugo_output__.stdout }}"
+    __hugo_extended_not_ok__: "{{ hugo_extended and 'extended' not in __hugo_output__.stdout or hugo_extended is false and 'extended' in __hugo_output__.stdout }}"
+
+- import_tasks: uninstall.yml
+  when:
+    - __hugo_version_not_ok__
+    - __hugo_extended_not_ok__
+    - __hugo_is_installed__
+
+- import_tasks: install.yml
+  when:
+    - __hugo_version_not_ok__
+    - __hugo_extended_not_ok__
+
+- import_tasks: shell_completion.yml
+  when:
+    - hugo_shell is defined

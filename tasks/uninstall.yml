@@ -1,0 +1,6 @@
+---
+- name: Uninstall Previous Version of Hugo
+  become: true
+  ansible.builtin.file:
+    path: /usr/local/bin/hugo
+    state: absent

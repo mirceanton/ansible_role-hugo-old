@@ -2,19 +2,25 @@
 - name: Download Hugo Archive
   ansible.builtin.get_url:
     url: "https://github.com/gohugoio/hugo/releases/download/v{{ hugo_version }}/hugo_{% if hugo_extended %}extended_{% endif %}{{ hugo_version }}_{{ hugo_arch }}.tar.gz"
-    dest: /tmp/hugo.tar.gz
+    dest: "/tmp/hugo_{% if hugo_extended %}extended_{% endif %}{{ hugo_version }}.tar.gz"
     mode: u=rw,g=rw,o=rw
+
+- name: Create Extraction Directory
+  ansible.builtin.file:
+    path: "/tmp/hugo_{% if hugo_extended %}extended_{% endif %}{{ hugo_version }}"
+    state: directory
+    mode: u=rwx,g=rwx,o=r
 
 - name: Extract Archive
   ansible.builtin.unarchive:
-    src: /tmp/hugo.tar.gz
-    dest: /tmp/
+    src: "/tmp/hugo_{% if hugo_extended %}extended_{% endif %}{{ hugo_version }}.tar.gz"
+    dest: "/tmp/hugo_{% if hugo_extended %}extended_{% endif %}{{ hugo_version }}"
     remote_src: true
 
 - name: Add Extracted Executable to Path
   become: true
   ansible.builtin.copy:
-    src: /tmp/hugo
+    src: "/tmp/hugo_{% if hugo_extended %}extended_{% endif %}{{ hugo_version }}/hugo"
     dest: /usr/local/bin/hugo
     remote_src: true
     mode: u=rwx,g=rx,o=rx

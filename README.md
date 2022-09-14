@@ -1,38 +1,72 @@
-Ansible Role: Hugo
-==================
+# Ansible Role: Hugo
 
 An Ansible role that installs the Hugo static site generator.
 
-Requirements
-------------
+## Requirements
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+N/A
 
-Role Variables
---------------
+## Role Variables
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+### `hugo_version`
+
+**Default**: `0.102.3`
+
+**Required**: no
+
+**Description**: The version of hugo to install. Downloaded from [github releases](https://github.com/gohugoio/hugo/releases)
+
+### `hugo_extended`
+
+**Default**: `true`
+
+**Required**: no
+
+**Description**: Whether or not to download the extended version (as oppposed to the regular version).
+
+### `hugo_arch`
+
+**Default**: `Linux-64bit`
+
+**Required**: no
+
+**Description**: The arch of the executable to download. For example, on a Raspberry Pi this might be set to `Linux-ARM` or `Linux-ARM64`
+
+### `hugo_shell`
+
+**Default**: N/A
+
+**Required**: no
+
+**Description**: The shell for which to set up completion. Leave undefined for no completion to be set up. Can be either `bash`, `fish` or `zsh`.
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+N/A
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+``` yaml
+---
+- name: Test playbook
+  hosts: all
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+  roles:
+    - role: mirceanton.hugo
+      vars:
+        hugo_shell: bash
+        hugo_version: "0.102.0"
+        hugo_extended: false
+```
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+A role by [Mircea-Pavel ANTON (Michael Anthony)](https://mirceanton.com)
